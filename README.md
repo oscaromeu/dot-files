@@ -17,7 +17,7 @@ used daily by me on Linux
 - [Git](https://git-scm.com/) version control
 - [Go](https://golang.org/) programming language
 - [Python](https://www.python.org/) programming language
-- [Alacritty](https://github.com/alacritty/alacritty) terminal on Mac OS
+- [Alacritty](https://github.com/alacritty/alacritty) terminal on Linux
 
 ## Installation
 
