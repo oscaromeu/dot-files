@@ -1,6 +1,5 @@
 # oscaromeu/dot-files
 
-**TODO**
 
 :wrench: Use and share at your own risk. These are regularly maintained and
 used daily by me on Linux
@@ -10,8 +9,8 @@ used daily by me on Linux
 **TODO**
 
 - [Gruvbox Material](https://github.com/sainnhe/gruvbox-material) color scheme
-- [JetBrains Mono](https://www.jetbrains.com/lp/mono/) font
-- [Fish Shell](https://fishshell.com/) command interface
+- [Ubuntu Mono Nerd Font](https://www.nerdfonts.com/) font
+- [Zsh Shell](https://fishshell.com/) command interface
 - [Vim](https://www.vim.org/) text editor
 - [Tmux](https://github.com/tmux/tmux) window/session management
 - [Git](https://git-scm.com/) version control
@@ -23,17 +22,8 @@ used daily by me on Linux
 
 **TODO**
 
-```bash
-$ cd ~
-$ git clone https://github.com/oscaromeu/dot-files.git .
-$ ./script/setup
-```
 
 ## Update
 
 **TODO**
 
-```bash
-$ cd ~
-$ ./script/update
-```
