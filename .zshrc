@@ -6,13 +6,14 @@
 export ZSH="$HOME/.oh-my-zsh"
 #
 # Use neo-vim as default text editor
-export EDITOR='nvim'
+#export EDITOR='nvim'
 #
 # Add GO to path
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 #
 # Set name of the theme to load
+#ZSH_THEME="awesomepanda"
 ZSH_THEME="robbyrussell"
 #
 # Disable auto title window
@@ -34,7 +35,7 @@ alias df='df -h'
 #alias la='ls -a'
 #alias ll='ls -l'
 #alias ls='ls -h'
-alias vim='nvim'
+#alias vim='nvim'
 alias vi=vim
 
 # ##########################################################################
@@ -61,17 +62,37 @@ function roco() {
   host $1 | grep 10.201 >& /dev/null
   if [[ $? -eq 0 ]]; then
     echo "dmz" > /dev/stderr
-    pass=$(ssh monitorizacion@lep1maa1 sudo docker exec awx_task "/opt/CARKaim/sdk/clipasswordsdk GetPassword -p AppDescs.AppID=app_lep1maa1 -p Query=\"Safe=WindowsServerLocalAdminDMZ;Folder=Root;Object=$1-ROCO\" -o Password" | tr -d '\n')
+    pass=$(ssh -o StrictHostKeyChecking=no monitorizacion@lep1maa1 sudo docker exec awx_task "/opt/CARKaim/sdk/clipasswordsdk GetPassword -p AppDescs.AppID=app_lep1maa1 -p Query=\"Safe=WindowsServerLocalAdminDMZ;Folder=Root;Object=$1-ROCO\" -o Password" | tr -d '\n')
   else
-    pass=$(ssh monitorizacion@lep1maa1 sudo docker exec awx_task "/opt/CARKaim/sdk/clipasswordsdk GetPassword -p AppDescs.AppID=app_lep1maa1 -p Query=\"Safe=WindowsServerLocalAdminLAN;Folder=Root;Object=$1-ROCO\" -o Password" | tr -d '\n')
+    pass=$(ssh -o StrictHostKeyChecking=no monitorizacion@lep1maa1 sudo docker exec awx_task "/opt/CARKaim/sdk/clipasswordsdk GetPassword -p AppDescs.AppID=app_lep1maa1 -p Query=\"Safe=WindowsServerLocalAdminLAN;Folder=Root;Object=$1-ROCO\" -o Password" | tr -d '\n')
   fi
+  echo "${pass}"
   xfreerdp /v:$1 /u:roco /p:"${pass}" /drive:tmp,/tmp/windows_share
+  
 }
 
+function connect () {
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J lep1maa1 cyberark@$1
+}
+
+############################################################################
+# Go Enviromental Variables
+# ##########################################################################
+
+export GO111MODULE=on
+
+############################################################################
+# Rust Enviromental Variables
+############################################################################
+#
+
+#export ~/.local/bin/rust-analyzer
 
 # Always work in a tmux session if tmux is installed
-if which tmux 2>&1 >/dev/null; then
-  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
-    tmux attach -t hack || tmux new -s mgnt; exit
-  fi
-fi
+#if which tmux 2>&1 >/dev/null; then
+#  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
+#    tmux attach -t hack || tmux new -s mgnt; exit
+#  fi
+#fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
